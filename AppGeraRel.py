@@ -235,8 +235,9 @@ def create_emissao_reemissao_sheet(client_df, workbook):
     total_tarifa = client_df['Tarifas'].sum()
     total_taxas = client_df['Tx.Embq.'].sum() + client_df['Tx.Serviço'].sum()
     total_valor = client_df['Total'].sum()
-    ticket_medio = total_valor / total_bilhetes if total_bilhetes > 0 else 0
-    
+    #ticket_medio = total_valor / total_bilhetes if total_bilhetes > 0 else 0
+    #Israel Ruiz 03/07/2025 - Calculo pela tarifa 
+    ticket_medio = total_tarifa / total_bilhetes if total_bilhetes > 0 else 0
     data_emissao = [
         ['EMISSÃO',  total_tarifa, total_taxas, total_bilhetes, total_valor, ticket_medio, 100.0],
         ['REMISSAO', 0, 0, 0, 0, 0, 0],
@@ -391,7 +392,8 @@ def create_cia_aerea_sheet(client_df, workbook):
     total_taxas = cia_totals['VALOR TAXAS'].sum()
     data_cia = []
     for _, row in cia_totals.iterrows():
-        ticket_medio = row['Total'] / row['QUANTIDADE DE BILHETES'] if row['QUANTIDADE DE BILHETES'] > 0 else 0
+        #ticket_medio = row['Total'] / row['QUANTIDADE DE BILHETES'] if row['QUANTIDADE DE BILHETES'] > 0 else 0
+        ticket_medio = row['VALOR DA TARIFA'] / row['QUANTIDADE DE BILHETES'] if row['QUANTIDADE DE BILHETES'] > 0 else 0
         percentual = (row['Total'] / total_valor)*100 if total_valor > 0 else 0
         data_cia.append([
             row['CIA NAC'], row['QUANTIDADE DE BILHETES'], row['VALOR DA TARIFA'],
@@ -512,7 +514,8 @@ def create_cia_trecho_sheet(client_df, workbook):
     total_taxas = cia_trecho_totals['VALOR DAS TAXAS'].sum()
     data_cia_trecho = []
     for _, row in cia_trecho_totals.iterrows():
-        ticket_medio = row['Total'] / row['QUANTIDADE DE BILHETES'] if row['QUANTIDADE DE BILHETES'] > 0 else 0
+        #ticket_medio = row['Total'] / row['QUANTIDADE DE BILHETES'] if row['QUANTIDADE DE BILHETES'] > 0 else 0
+        ticket_medio = row['VALOR DA TARIFA'] / row['QUANTIDADE DE BILHETES'] if row['QUANTIDADE DE BILHETES'] > 0 else 0
         percentual = (row['Total'] / total_valor)*100 if total_valor > 0 else 0
         data_cia_trecho.append([
             row['CIA'], row['TRECHO'], row['QUANTIDADE DE BILHETES'], row['VALOR DA TARIFA'],
@@ -592,7 +595,6 @@ def create_solicitante_sheet(client_df, workbook):
         adjusted_width = max_length + 2
         ws.column_dimensions[column].width = adjusted_width
 
-# Função para criar a aba TOTAL CREDITOS DISPONIVEIS
 # Função para criar a aba TOTAL CREDITOS DISPONIVEIS
 def create_creditos_disponiveis_sheet(client_df, workbook):
     ws = workbook.create_sheet("TOTAL CREDITOS DISPONIVEIS")
