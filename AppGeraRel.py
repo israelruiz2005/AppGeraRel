@@ -650,7 +650,7 @@ def process_files(client_file, supplier_file, output_file):
 class ExcelProcessorApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Gerador de Relatórios Excel")
+        self.root.title("Gerador de Relatórios Excel - Versão 2.0 - 08/07/2025")
         self.root.geometry("600x400")
         
         self.client_file = tk.StringVar()
