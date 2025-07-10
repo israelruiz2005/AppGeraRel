@@ -73,7 +73,7 @@ def load_client_data(file_path):
         # Lista de colunas esperadas
         required_columns = ['Razão Social', 'cnpj', 'Centro de Custo', 'Fornecedor', 'Tarifas', 
                            'Tx.Embq.', 'Tx.Serviço', 'Total', 'Passageiro', 'Solicitante', 
-                           'Documento', 'Trecho', 'Emissão', 'IDA', 'VOLTA']
+                           'Documento', 'Trecho', 'Emissão', 'IDA', 'VOLTA','LOCALIZADOR-TKT']
         
         # Verifica se todas as colunas necessárias estão presentes
         missing_columns = [col for col in required_columns if col not in df.columns]
@@ -129,7 +129,7 @@ def create_emissoes_sheet(client_df, workbook):
     ws = workbook.create_sheet("EMISSOES")
     headers = ['RAZAO SOC', 'CNPJ', 'CENTRO DE CUSTO', 'CIA', 'TARIFA', 'TAXA DE EMBARQUE',
                'TAXA DE SERVIÇO', 'TOTAL', 'VIAJANTE', 'SOLICITANTE', 'LOCALIZADOR BILHETE',
-               'TRECHO COMPL.', 'DT. EMISSAO', 'DT. PARTIDA', 'DT. RETORNO']
+               'TRECHO COMPL.', 'DT. EMISSAO', 'DT. PARTIDA', 'DT. RETORNO','LOCALIZADOR']
     
     for col, header in enumerate(headers, 1):
         cell = ws.cell(row=1, column=col)
@@ -162,7 +162,8 @@ def create_emissoes_sheet(client_df, workbook):
             row['Trecho'],
             dt_emissao,
             dt_partida,
-            dt_retorno
+            dt_retorno,
+            row['LOCALIZADOR-TKT']
         ])
     
     for row_idx, data in enumerate(data_rows, 2):
@@ -650,7 +651,7 @@ def process_files(client_file, supplier_file, output_file):
 class ExcelProcessorApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Gerador de Relatórios Excel - Versão 2.0 - 08/07/2025")
+        self.root.title("Gerador de Relatórios Excel - Versão 2.1 - 10/07/2025")
         self.root.geometry("600x400")
         
         self.client_file = tk.StringVar()
