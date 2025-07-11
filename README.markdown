@@ -86,7 +86,7 @@ pyinstaller --onefile AppGeraRel.py
 ```
 ou
 ```bash
-pyinstaller --onefile AppGeraRel.py
+pyinstaller --onefile --windowed AppGeraRel.py
 ```
 
 3. O executável será gerado na pasta `dist` com o nome `AppGeraRel.exe`.
