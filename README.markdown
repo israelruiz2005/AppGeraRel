@@ -20,7 +20,7 @@ O script inclui uma interface gráfica simples criada com `tkinter` para facilit
 - **`CMCL904-CLIENTE-CC.xlsx`**: Contém dados de clientes, como Razão Social, CNPJ, Centro de Custo, Fornecedor, Tarifas, Taxas, Passageiro, Solicitante, Documento, Trecho, Emissão, Ida e Volta.
 - **`CMCL904-FORNECEDOR.xlsx`**: Contém dados de fornecedores, como Fornecedor, Tarifas, Taxas e Total.
 
-Dois arquivos de teste com dados anonimizados estão disponíveis na pasta `teste_data`:
+Dois arquivos de teste com dados anonimizados estão disponíveis na pasta `test_data`:
 - `CMCL904-CLIENTE-CC_anonimizado.xlsx`
 - `CMCL904-FORNECEDOR_anonimizado.xlsx`
 
@@ -81,6 +81,10 @@ pip install pyinstaller
 
 2. Navegue até o diretório onde está o arquivo `AppGeraRel.py` e execute:
 
+```bash
+pyinstaller --onefile AppGeraRel.py
+```
+ou
 ```bash
 pyinstaller --onefile AppGeraRel.py
 ```
